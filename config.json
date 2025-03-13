@@ -1,0 +1,9 @@
+{
+  "IP": "",
+  "ListenPort": 5005,
+  "RDPPort": 3389,
+  "AccessDuration": 60, 
+  "UUID": "11c1d446-adf4-46d4-9524-363699e51bdb",
+  "TaskInterval": 5,
+  "EnableLogging": true
+}
