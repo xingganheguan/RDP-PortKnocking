@@ -24,3 +24,70 @@
   
 3. 配置文件设置好以后，**运行 **`` SetupTask.ps1 脚本会自动生成规则和计划任务
 4. 持续运行 PortKnocker.ps1
+
+## 使用 NSSM 将 PowerShell 脚本注册为 Windows 服务
+
+### 1. 下载 NSSM
+从 [NSSM 官网](https://nssm.cc/) 下载 `nssm.exe`，并解压到某个目录（如 `D:\nssm`）。
+
+### 2. 准备 PowerShell 脚本
+假设你的 PowerShell 脚本路径为：`D:\portknock\PortKnocker.ps1`
+它包含你希望作为服务运行的代码。
+
+### 3. 使用 NSSM 注册服务
+打开PowerShell 或 CMD 输入命令 ：
+
+```cmd
+cd /d D:\nssm
+
+nssm install PortKnocker
+```
+会弹出一个 GUI 窗口，在 Application 选项卡填写以下内容：
+
+> Path: 选择 powershell.exe（通常在C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe）。
+> 
+> Startup directory: 选择脚本所在目录，如 D:\portknock。
+> 
+> Arguments: 指定如下内容：
+> 
+> -ExecutionPolicy Bypass -File D:\portknock\PortKnocker.ps1
+
+切换 Details 选项卡
+> Display name: 显示名称 输入PortKnocker service
+> 
+
+> 
+> Dsecription: 描述
+> 
+> Startup type ：启动类型. Automatic -自动
+
+点击 Install service。
+
+
+### 4. 启动服务
+注册完成后，在 PowerShell 中运行以下命令启动服务：
+
+```powershell
+Start-Service PortKnocker
+```
+或者可以在`服务`面板中手动启动
+
+这样，你的 PowerShell 脚本就成功注册为 Windows 服务，并能随 Windows 自动运行！ 🚀
+
+### NSSM 可用命令
+```powershell
+卸载服务： nssm remove MyPowerShellService confirm
+
+启动服务： nssm start <servicename>
+
+停止服务： nssm stop <servicename>
+
+重启服务： nssm restart <servicename>
+
+暂停/继续服务
+nssm pause <servicename>
+nssm continue <servicename>
+
+查看服务状态：nssm status <servicename>
+```
+参考： [使用NSSM注册Windows服务](https://www.cnblogs.com/lichu-lc/p/10263799.html)
