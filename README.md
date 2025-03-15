@@ -16,6 +16,8 @@ windows的小鸡面对暴力破解，设置白名单是个好办法，但是像I
 - `RemoveFirewall.ps1` - 移除过期的防火墙规则（默认带日志）
 - `RemoveFirewall_NoLog.ps1` - 移除过期的防火墙规则（不带日志）
 
+- `knock.ps1` 客户端连接服务器的脚本
+
 ## 使用方法
 
 1. **配置说明**
@@ -28,7 +30,7 @@ windows的小鸡面对暴力破解，设置白名单是个好办法，但是像I
 - `TaskInterval` - 根据过期时间每隔 n 分钟清除防火墙规则
 - `EnableLogging` - 是否需要生成日志
   
-3. 配置文件设置好以后，**运行 **`` SetupTask.ps1 脚本会自动生成规则和计划任务
+3. 配置文件设置好以后，运行`SetupTask.ps1` 脚本会自动生成规则和计划任务
 4. 持续运行 PortKnocker.ps1
 
 ## 使用 NSSM 将 PowerShell 脚本注册为 Windows 服务
